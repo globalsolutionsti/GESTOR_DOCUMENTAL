@@ -1,5 +1,13 @@
 const API = "https://script.google.com/macros/s/AKfycbz_ghoLIgfYaN-JSlwZ_hJ3KFa06j0TazmEtRULbw5NZnwsS3AqGlQ6_sw8i5a75mo9/exec";
 
+/* 🔐 SI YA HAY SESIÓN → DASHBOARD */
+const token = localStorage.getItem("token");
+
+if (token) {
+  window.location.href = "dashboard.html";
+}
+
+/* 🔒 SHA256 */
 async function sha256(text) {
   const encoder = new TextEncoder();
   const data = encoder.encode(text);
@@ -9,6 +17,7 @@ async function sha256(text) {
     .join("");
 }
 
+/* 🔑 LOGIN */
 async function login() {
 
   const usuario = document.getElementById("usuario").value.trim();
@@ -22,18 +31,20 @@ async function login() {
 
   error.innerText = "Validando...";
 
-  const pinHash = await sha256(pin);
+  try {
 
-  fetch(API, {
-    method: "POST",
-    body: JSON.stringify({
-      action: "login",
-      usuario,
-      pin: pinHash
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
+    const pinHash = await sha256(pin);
+
+    const res = await fetch(API, {
+      method: "POST",
+      body: JSON.stringify({
+        action: "login",
+        usuario,
+        pin: pinHash
+      })
+    });
+
+    const data = await res.json();
 
     if (data.status === "success") {
 
@@ -46,8 +57,7 @@ async function login() {
       error.innerText = data.message || "Credenciales incorrectas";
     }
 
-  })
-  .catch(() => {
+  } catch (e) {
     error.innerText = "Error de conexión";
-  });
+  }
 }
