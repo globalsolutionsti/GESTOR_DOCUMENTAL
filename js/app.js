@@ -8,8 +8,11 @@ if (!token || !user) {
   window.location.href = "index.html";
 }
 
-document.getElementById("userName").innerText =
-  user.nombre + " (" + user.rol + ")";
+const userNameEl = document.getElementById("userName");
+
+if (userNameEl && user) {
+  userNameEl.innerText = user.nombre + " (" + user.rol + ")";
+}
 
 /* MENSAJES */
 function showMsg(text, type="success") {
