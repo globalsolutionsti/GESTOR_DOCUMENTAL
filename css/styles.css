@@ -1,113 +1,158 @@
 body {
   margin: 0;
-  font-family: Arial;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
 }
 
-.container {
-  display: flex;
-  height: 100vh;
-}
-
-.left {
-  width: 50%;
-  background: #8b0000;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.right {
-  width: 50%;
-  background: #eee;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.login-box {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 300px;
-}
-
-.login-box input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-}
-
-.login-box button {
-  width: 100%;
-  padding: 10px;
-  background: #8b0000;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-.error {
-  color: red;
-}
+/* LAYOUT */
 .layout {
   display: flex;
   height: 100vh;
 }
 
+/* SIDEBAR */
 .sidebar {
-  width: 220px;
+  width: 240px;
+  background: linear-gradient(180deg, #8b0000, #5a0000);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.menu {
+  padding: 10px;
+}
+
+.menu-item {
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.menu-item.active {
+  background: rgba(255,255,255,0.25);
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOPBAR */
+.topbar {
+  height: 60px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* BOTONES */
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn.primary {
   background: #8b0000;
   color: white;
+}
+
+.btn.success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-logout {
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+}
+
+/* CARDS */
+.actions {
+  display: flex;
+  gap: 20px;
   padding: 20px;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.main {
-  flex: 1;
-  background: #f5f5f5;
-}
-
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
+.card {
   background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
 
-.actions {
-  padding: 15px;
+.card h3 {
+  margin-top: 0;
 }
 
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/* EXPLORADOR */
 .explorer {
-  padding: 15px;
+  padding: 20px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .item {
-  width: 120px;
-  margin: 10px;
+  width: 140px;
   background: white;
-  padding: 10px;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 10px;
   text-align: center;
   cursor: pointer;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
+.item:hover {
+  transform: scale(1.05);
+}
+
+/* MENSAJES */
 .msg {
-  margin: 10px;
+  margin: 10px 20px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 6px;
 }
 
 .msg.success {
