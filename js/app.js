@@ -1,29 +1,43 @@
 const API = "https://script.google.com/macros/s/AKfycbz_ghoLIgfYaN-JSlwZ_hJ3KFa06j0TazmEtRULbw5NZnwsS3AqGlQ6_sw8i5a75mo9/exec";
+
 let currentFolder = null;
 
+/* 🔐 SESIÓN */
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
 
+/* 🚫 VALIDACIÓN DE ACCESO */
 if (!token || !user) {
   window.location.href = "index.html";
 }
 
-const userNameEl = document.getElementById("userName");
+/* 🚀 INIT SEGURO */
+window.onload = () => {
 
-if (userNameEl && user) {
-  userNameEl.innerText = user.nombre + " (" + user.rol + ")";
-}
+  const userNameEl = document.getElementById("userName");
 
-/* MENSAJES */
-function showMsg(text, type="success") {
+  if (userNameEl && user) {
+    userNameEl.innerText = `${user.nombre} (${user.rol})`;
+  }
+
+  loadRoot();
+};
+
+/* 💬 MENSAJES PROFESIONALES */
+function showMsg(text, type = "success") {
   const msg = document.getElementById("msg");
+
+  if (!msg) return;
+
   msg.innerText = text;
   msg.className = "msg " + type;
 
-  setTimeout(() => msg.innerText = "", 3000);
+  setTimeout(() => {
+    msg.innerText = "";
+  }, 3000);
 }
 
-/* API */
+/* 🌐 API CENTRALIZADA */
 function api(data) {
   return fetch(API, {
     method: "POST",
@@ -31,55 +45,79 @@ function api(data) {
       ...data,
       token
     })
-  }).then(res => res.json());
+  })
+  .then(res => res.json())
+  .catch(() => ({
+    status: "error",
+    message: "Error de conexión"
+  }));
 }
 
-/* LOAD */
+/* 📂 CARGAR ROOT */
 function loadRoot() {
   api({ action: "listar" }).then(render);
 }
 
-/* RENDER */
+/* 🧠 RENDER EXPLORADOR */
 function render(data) {
 
   if (data.status !== "success") {
-    showMsg("Error al cargar", "error");
+    showMsg(data.message || "Error al cargar", "error");
     return;
   }
 
   currentFolder = data.folderId;
 
   const explorer = document.getElementById("explorer");
+
+  if (!explorer) return;
+
   explorer.innerHTML = "";
 
+  /* 📁 CARPETAS */
   data.folders.forEach(f => {
-    explorer.innerHTML += `
-      <div class="item" onclick="openFolder('${f.id}')">
-        📁<br>${f.nombre}
-      </div>
+    const div = document.createElement("div");
+    div.className = "item folder";
+    div.innerHTML = `
+      <div class="icon">📁</div>
+      <div class="name">${f.nombre}</div>
     `;
+    div.onclick = () => openFolder(f.id);
+
+    explorer.appendChild(div);
   });
 
+  /* 📄 ARCHIVOS */
   data.files.forEach(f => {
-    explorer.innerHTML += `
-      <div class="item">
-        📄<br>${f.nombre}
-      </div>
+    const div = document.createElement("div");
+    div.className = "item file";
+    div.innerHTML = `
+      <div class="icon">📄</div>
+      <div class="name">${f.nombre}</div>
     `;
+
+    explorer.appendChild(div);
   });
 }
 
-/* NAV */
+/* 📂 NAVEGAR */
 function openFolder(id) {
   api({ action: "listar", folderId: id }).then(render);
 }
 
-/* CREAR */
+/* 📁 CREAR CARPETA */
 function crearCarpeta() {
 
-  const nombre = document.getElementById("folderName").value;
+  const input = document.getElementById("folderName");
 
-  if (!nombre) return showMsg("Escribe un nombre", "error");
+  if (!input) return;
+
+  const nombre = input.value.trim();
+
+  if (!nombre) {
+    showMsg("Escribe un nombre de carpeta", "error");
+    return;
+  }
 
   api({
     action: "crearCarpeta",
@@ -88,21 +126,26 @@ function crearCarpeta() {
   }).then(res => {
 
     if (res.status === "success") {
-      showMsg("Carpeta creada");
+      showMsg("Carpeta creada correctamente");
+      input.value = "";
       loadRoot();
     } else {
-      showMsg(res.message, "error");
+      showMsg(res.message || "Error al crear carpeta", "error");
     }
   });
 }
 
-/* SUBIR */
+/* 📤 SUBIR ARCHIVO */
 function subirArchivo() {
 
-  const file = document.getElementById("fileInput").files[0];
+  const input = document.getElementById("fileInput");
 
-  if (!file) return showMsg("Selecciona un archivo", "error");
+  if (!input || !input.files.length) {
+    showMsg("Selecciona un archivo", "error");
+    return;
+  }
 
+  const file = input.files[0];
   const reader = new FileReader();
 
   reader.onload = function(e) {
@@ -118,10 +161,11 @@ function subirArchivo() {
     }).then(res => {
 
       if (res.status === "success") {
-        showMsg("Archivo subido");
+        showMsg("Archivo subido correctamente");
+        input.value = "";
         loadRoot();
       } else {
-        showMsg("Error al subir", "error");
+        showMsg(res.message || "Error al subir archivo", "error");
       }
     });
   };
@@ -129,12 +173,14 @@ function subirArchivo() {
   reader.readAsDataURL(file);
 }
 
-/* LOGOUT FIX */
+/* 🔓 LOGOUT FUNCIONAL */
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
-  window.location.href = "index.html";
-}
 
-/* INIT */
-loadRoot();
+  showMsg("Sesión cerrada");
+
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 500);
+}
