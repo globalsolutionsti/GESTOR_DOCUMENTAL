@@ -10,36 +10,55 @@
 
 <div class="layout">
 
-  <!-- Sidebar -->
+  <!-- SIDEBAR -->
   <div class="sidebar">
-    <h2>IEDEP</h2>
-    <ul>
-      <li onclick="loadRoot()">📁 Documentos</li>
-    </ul>
+    <div class="logo">IEDEP</div>
+
+    <div class="menu">
+      <div class="menu-item active" onclick="loadRoot()">
+        📁 <span>Documentos</span>
+      </div>
+    </div>
   </div>
 
-  <!-- Main -->
+  <!-- MAIN -->
   <div class="main">
 
-    <!-- Topbar -->
+    <!-- TOPBAR -->
     <div class="topbar">
-      <span id="userName"></span>
-      <button onclick="logout()">Salir</button>
+      <div class="title">Repositorio Documental</div>
+
+      <div class="user-box">
+        <span id="userName"></span>
+        <button class="btn-logout" onclick="logout()">Salir</button>
+      </div>
     </div>
 
-    <!-- Actions -->
+    <!-- ACCIONES -->
     <div class="actions">
-      <input type="text" id="folderName" placeholder="Nueva carpeta">
-      <button onclick="crearCarpeta()">Crear</button>
 
-      <input type="file" id="fileInput">
-      <button onclick="subirArchivo()">Subir</button>
+      <div class="card">
+        <h3>📁 Crear Carpeta</h3>
+        <div class="row">
+          <input type="text" id="folderName" placeholder="Nombre de carpeta">
+          <button class="btn primary" onclick="crearCarpeta()">Crear</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>📤 Subir Archivo</h3>
+        <div class="row">
+          <input type="file" id="fileInput">
+          <button class="btn success" onclick="subirArchivo()">Subir</button>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Notificación -->
+    <!-- MENSAJE -->
     <div id="msg" class="msg"></div>
 
-    <!-- Explorador -->
+    <!-- EXPLORADOR -->
     <div id="explorer" class="explorer"></div>
 
   </div>
