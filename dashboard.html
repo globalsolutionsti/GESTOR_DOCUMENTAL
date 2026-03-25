@@ -3,24 +3,49 @@
 <head>
 <meta charset="UTF-8">
 <title>Dashboard</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
-<h1>Bienvenido</h1>
+<div class="layout">
 
-<p id="user"></p>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>IEDEP</h2>
+    <ul>
+      <li onclick="loadRoot()">📁 Documentos</li>
+    </ul>
+  </div>
 
-<script>
-const user = JSON.parse(localStorage.getItem("user"));
+  <!-- Main -->
+  <div class="main">
 
-if (!user) {
-  window.location.href = "index.html";
-}
+    <!-- Topbar -->
+    <div class="topbar">
+      <span id="userName"></span>
+      <button onclick="logout()">Salir</button>
+    </div>
 
-document.getElementById("user").innerText =
-  "Usuario: " + user.nombre + " | Rol: " + user.rol;
-</script>
+    <!-- Actions -->
+    <div class="actions">
+      <input type="text" id="folderName" placeholder="Nueva carpeta">
+      <button onclick="crearCarpeta()">Crear</button>
 
+      <input type="file" id="fileInput">
+      <button onclick="subirArchivo()">Subir</button>
+    </div>
+
+    <!-- Notificación -->
+    <div id="msg" class="msg"></div>
+
+    <!-- Explorador -->
+    <div id="explorer" class="explorer"></div>
+
+  </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
 </body>
 </html>
