@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f6f9;
+  font-family: Arial, sans-serif;
+  background: #f2f2f2;
 }
 
 /* LAYOUT */
@@ -12,31 +12,30 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-  width: 240px;
-  background: linear-gradient(180deg, #8b0000, #5a0000);
+  width: 260px;
+  background: #8b0000;
   color: white;
   display: flex;
   flex-direction: column;
+  padding-top: 40px;
 }
 
 .logo {
   font-size: 22px;
   font-weight: bold;
-  padding: 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  text-align: center;
+  margin-bottom: 40px;
 }
 
 .menu {
-  padding: 10px;
+  padding: 0 20px;
 }
 
 .menu-item {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 12px 15px;
+  border-radius: 6px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin-bottom: 10px;
 }
 
 .menu-item:hover {
@@ -57,16 +56,16 @@ body {
 /* TOPBAR */
 .topbar {
   height: 60px;
-  background: white;
+  background: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 0 30px;
+  border-bottom: 1px solid #ddd;
 }
 
 .title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -76,59 +75,63 @@ body {
   gap: 15px;
 }
 
-/* BOTONES */
-.btn {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn.primary {
+.btn-logout {
   background: #8b0000;
   color: white;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
-.btn.success {
-  background: #28a745;
-  color: white;
-}
-
-.btn-logout {
-  background: #333;
-  color: white;
-  padding: 8px 12px;
-  border-radius: 5px;
-}
-
-/* CARDS */
+/* ACCIONES */
 .actions {
   display: flex;
   gap: 20px;
-  padding: 20px;
+  padding: 20px 30px;
 }
 
+/* TARJETAS (MISMO ESTILO LOGIN) */
 .card {
   background: white;
   padding: 20px;
-  border-radius: 10px;
-  width: 300px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  width: 320px;
+  border: 1px solid #e0e0e0;
 }
 
 .card h3 {
-  margin-top: 0;
+  margin: 0 0 15px 0;
+  font-size: 14px;
 }
 
-.row {
-  display: flex;
-  gap: 10px;
+/* INPUTS COMO LOGIN */
+.card input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+/* BOTONES COMO LOGIN */
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #8b0000;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn.secondary {
+  background: #444;
 }
 
 /* EXPLORADOR */
 .explorer {
-  padding: 20px;
+  padding: 20px 30px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -138,27 +141,30 @@ body {
   background: white;
   margin: 10px;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 6px;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
 }
 
 .item:hover {
-  transform: scale(1.05);
+  background: #fafafa;
 }
 
-/* MENSAJES */
+/* MENSAJES (MISMO TONO) */
 .msg {
-  margin: 10px 20px;
+  margin: 0 30px;
   padding: 10px;
-  border-radius: 6px;
+  border-radius: 4px;
+  font-size: 13px;
 }
 
 .msg.success {
-  background: #d4edda;
+  background: #e6f4ea;
+  color: #2e7d32;
 }
 
 .msg.error {
-  background: #f8d7da;
+  background: #fdecea;
+  color: #c62828;
 }
