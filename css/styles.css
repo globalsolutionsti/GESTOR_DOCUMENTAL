@@ -1,8 +1,100 @@
+/* =========================
+   RESET + BASE
+========================= */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   background: #f2f2f2;
 }
+
+/* =========================
+   LOGIN
+========================= */
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* IZQUIERDA */
+.left {
+  width: 50%;
+  background: #8b0000;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-content {
+  text-align: center;
+}
+
+.left-content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.left-content p {
+  font-size: 18px;
+  max-width: 400px;
+}
+
+/* DERECHA */
+.right {
+  width: 50%;
+  background: #dcdcdc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* LOGIN BOX */
+.login-box {
+  background: #efefef;
+  padding: 30px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+}
+
+/* INPUTS LOGIN */
+.login-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* BOTÓN LOGIN */
+.login-box button {
+  width: 100%;
+  padding: 10px;
+  background: #8b0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-box button:hover {
+  background: #6f0000;
+}
+
+/* ERROR */
+.error {
+  color: #c62828;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
 
 /* LAYOUT */
 .layout {
@@ -36,6 +128,7 @@ body {
   border-radius: 6px;
   cursor: pointer;
   margin-bottom: 10px;
+  transition: background 0.2s;
 }
 
 .menu-item:hover {
@@ -75,6 +168,7 @@ body {
   gap: 15px;
 }
 
+/* BOTÓN LOGOUT */
 .btn-logout {
   background: #8b0000;
   color: white;
@@ -84,14 +178,20 @@ body {
   border-radius: 4px;
 }
 
-/* ACCIONES */
+.btn-logout:hover {
+  background: #6f0000;
+}
+
+/* =========================
+   ACCIONES (CARPETA / SUBIDA)
+========================= */
 .actions {
   display: flex;
   gap: 20px;
   padding: 20px 30px;
 }
 
-/* TARJETAS (MISMO ESTILO LOGIN) */
+/* TARJETAS */
 .card {
   background: white;
   padding: 20px;
@@ -105,7 +205,7 @@ body {
   font-size: 14px;
 }
 
-/* INPUTS COMO LOGIN */
+/* INPUTS DASHBOARD */
 .card input {
   width: 100%;
   padding: 10px;
@@ -114,7 +214,7 @@ body {
   margin-bottom: 10px;
 }
 
-/* BOTONES COMO LOGIN */
+/* BOTONES */
 .btn {
   width: 100%;
   padding: 10px;
@@ -125,11 +225,17 @@ body {
   border-radius: 4px;
 }
 
+.btn:hover {
+  background: #6f0000;
+}
+
 .btn.secondary {
   background: #444;
 }
 
-/* EXPLORADOR */
+/* =========================
+   EXPLORADOR
+========================= */
 .explorer {
   padding: 20px 30px;
   display: flex;
@@ -145,13 +251,17 @@ body {
   text-align: center;
   cursor: pointer;
   border: 1px solid #e0e0e0;
+  transition: 0.2s;
 }
 
 .item:hover {
   background: #fafafa;
+  transform: translateY(-2px);
 }
 
-/* MENSAJES (MISMO TONO) */
+/* =========================
+   MENSAJES
+========================= */
 .msg {
   margin: 0 30px;
   padding: 10px;
