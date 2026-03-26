@@ -3,8 +3,7 @@
 
   <input type="text" id="usuario" placeholder="Usuario">
   <input type="text" id="nombre" placeholder="Nombre completo">
-  <input type="text" id="pin" placeholder="PIN">
-  
+
   <select id="rol">
     <option value="admin">Admin</option>
     <option value="user">Usuario</option>
@@ -13,4 +12,9 @@
   <button onclick="crearUsuario()">Crear</button>
 
   <p id="msg"></p>
+
+  <div id="pinBox" style="display:none; margin-top:10px;">
+    <strong>PIN generado:</strong>
+    <h2 id="pinGenerado"></h2>
+  </div>
 </div>
