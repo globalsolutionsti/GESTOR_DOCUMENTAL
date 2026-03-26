@@ -1,34 +1,140 @@
-<div class="form-card">
-  <h2>Crear Usuario</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Usuarios</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <input type="text" id="usuario" placeholder="Usuario">
-  <input type="text" id="nombre" placeholder="Nombre completo">
+  <!-- Estilos -->
+  <link rel="stylesheet" href="style.css">
 
-  <select id="rol">
-    <option value="admin">Admin</option>
-    <option value="user">Usuario</option>
-  </select>
+  <style>
+    body {
+      background: #0f172a;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+    }
 
-  <button onclick="crearUsuario()">Crear</button>
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
 
-  <p id="msg"></p>
+    .form-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
 
-  <div id="pinBox" style="display:none; margin-top:10px;">
-    <strong>PIN generado:</strong>
-    <h2 id="pinGenerado"></h2>
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    #msg {
+      margin-top: 10px;
+    }
+
+    #pinBox {
+      background: #020617;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 15px;
+      text-align: center;
+      border: 1px solid #3b82f6;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 30px;
+      border-collapse: collapse;
+      background: #1e293b;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background: #334155;
+    }
+
+    tr:nth-child(even) {
+      background: #0f172a;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- FORMULARIO -->
+  <div class="form-card">
+    <h2>Crear Usuario</h2>
+
+    <input type="text" id="usuario" placeholder="Usuario">
+    <input type="text" id="nombre" placeholder="Nombre completo">
+
+    <select id="rol">
+      <option value="admin">Admin</option>
+      <option value="user">Usuario</option>
+    </select>
+
+    <button id="btnCrear">Crear Usuario</button>
+
+    <p id="msg"></p>
+
+    <div id="pinBox" style="display:none;">
+      <strong>PIN generado:</strong>
+      <h2 id="pinGenerado"></h2>
+    </div>
   </div>
-</div>
-<!-- 👇 AQUÍ VA EL PUNTO 5 -->
-<h3 style="margin-top:30px;">Usuarios</h3>
 
-<table id="tablaUsuarios">
-  <thead>
-    <tr>
-      <th>Usuario</th>
-      <th>Nombre</th>
-      <th>Rol</th>
-      <th>Estado</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+  <!-- TABLA -->
+  <h3>Usuarios</h3>
+
+  <table id="tablaUsuarios">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Nombre</th>
+        <th>Rol</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+</div>
+
+<!-- JS -->
+<script src="usuarios.js"></script>
+
+</body>
+</html>
