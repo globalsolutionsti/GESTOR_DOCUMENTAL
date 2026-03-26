@@ -10,16 +10,19 @@ function crearUsuario() {
 
   const usuario = document.getElementById("usuario").value;
   const nombre = document.getElementById("nombre").value;
-  const pin = document.getElementById("pin").value;
   const rol = document.getElementById("rol").value;
-  const msg = document.getElementById("msg");
 
-  if (!usuario || !nombre || !pin) {
+  const msg = document.getElementById("msg");
+  const pinBox = document.getElementById("pinBox");
+  const pinGenerado = document.getElementById("pinGenerado");
+
+  if (!usuario || !nombre) {
     msg.innerText = "Completa todos los campos";
     return;
   }
 
   msg.innerText = "Creando...";
+  pinBox.style.display = "none";
 
   fetch(API, {
     method: "POST",
@@ -27,7 +30,6 @@ function crearUsuario() {
       action: "crearUsuario",
       usuario,
       nombre,
-      pin,
       rol,
       token
     })
@@ -36,7 +38,13 @@ function crearUsuario() {
   .then(data => {
 
     if (data.status === "success") {
+
       msg.innerText = "Usuario creado correctamente";
+
+      // 🔥 MOSTRAR PIN SOLO UNA VEZ
+      pinGenerado.innerText = data.pin;
+      pinBox.style.display = "block";
+
     } else {
       msg.innerText = data.message;
     }
