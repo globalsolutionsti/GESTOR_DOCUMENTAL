@@ -2,14 +2,18 @@ const API = "https://script.google.com/macros/s/AKfycbz_ghoLIgfYaN-JSlwZ_hJ3KFa0
 
 const token = localStorage.getItem("token");
 
+// 🔒 Validar sesión
 if (!token) {
   window.location.href = "index.html";
 }
 
+/* =========================
+   CREAR USUARIO
+========================= */
 function crearUsuario() {
 
-  const usuario = document.getElementById("usuario").value;
-  const nombre = document.getElementById("nombre").value;
+  const usuario = document.getElementById("usuario").value.trim();
+  const nombre = document.getElementById("nombre").value.trim();
   const rol = document.getElementById("rol").value;
 
   const msg = document.getElementById("msg");
@@ -39,14 +43,20 @@ function crearUsuario() {
 
     if (data.status === "success") {
 
-  msg.innerText = "Usuario creado correctamente";
+      msg.innerText = "Usuario creado correctamente";
 
-  pinGenerado.innerText = data.pin;
-  pinBox.style.display = "block";
+      // Mostrar PIN
+      pinGenerado.innerText = data.pin;
+      pinBox.style.display = "block";
 
-  cargarUsuarios(); // 👈 AGREGA ESTA LÍNEA
+      // Limpiar campos
+      document.getElementById("usuario").value = "";
+      document.getElementById("nombre").value = "";
 
-} else {
+      // Recargar tabla
+      cargarUsuarios();
+
+    } else {
       msg.innerText = data.message;
     }
 
@@ -55,6 +65,10 @@ function crearUsuario() {
     msg.innerText = "Error de conexión";
   });
 }
+
+/* =========================
+   LISTAR USUARIOS
+========================= */
 function cargarUsuarios() {
 
   fetch(API, {
@@ -84,3 +98,14 @@ function cargarUsuarios() {
 
   });
 }
+
+/* =========================
+   EVENTO BOTÓN
+========================= */
+document.getElementById("btnCrear")
+  .addEventListener("click", crearUsuario);
+
+/* =========================
+   INICIAR
+========================= */
+cargarUsuarios();
