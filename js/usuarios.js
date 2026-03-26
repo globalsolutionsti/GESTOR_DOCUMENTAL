@@ -39,18 +39,48 @@ function crearUsuario() {
 
     if (data.status === "success") {
 
-      msg.innerText = "Usuario creado correctamente";
+  msg.innerText = "Usuario creado correctamente";
 
-      // 🔥 MOSTRAR PIN SOLO UNA VEZ
-      pinGenerado.innerText = data.pin;
-      pinBox.style.display = "block";
+  pinGenerado.innerText = data.pin;
+  pinBox.style.display = "block";
 
-    } else {
+  cargarUsuarios(); // 👈 AGREGA ESTA LÍNEA
+
+} else {
       msg.innerText = data.message;
     }
 
   })
   .catch(() => {
     msg.innerText = "Error de conexión";
+  });
+}
+function cargarUsuarios() {
+
+  fetch(API, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "listarUsuarios",
+      token
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+
+    const tbody = document.querySelector("#tablaUsuarios tbody");
+    tbody.innerHTML = "";
+
+    data.usuarios.forEach(u => {
+
+      tbody.innerHTML += `
+        <tr>
+          <td>${u.usuario}</td>
+          <td>${u.nombre}</td>
+          <td>${u.rol}</td>
+          <td>${u.activo ? "Activo" : "Inactivo"}</td>
+        </tr>
+      `;
+    });
+
   });
 }
